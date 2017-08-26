@@ -12,6 +12,8 @@ class TestFind(unittest.TestCase):
         sys.argv = ['', CONFIG_PATH, '-n', '\w+']
         ex_output = '''{0}/test_find.py\n{1}/findfind.py'''\
             .format(CONFIG_PATH, CONFIG_PATH)
+        ex_output_v2 = '''{0}/findfind.py\n{1}/test_find.py''' \
+            .format(CONFIG_PATH, CONFIG_PATH)
 
         with capture_output() as (out, err):
 
@@ -19,7 +21,8 @@ class TestFind(unittest.TestCase):
 
         assert out is not None
         rl_output = out.getvalue().strip()
-        assert rl_output == ex_output
+        assert (rl_output == ex_output or
+            rl_output == ex_output_v2)
 
 @contextmanager
 def capture_output():
