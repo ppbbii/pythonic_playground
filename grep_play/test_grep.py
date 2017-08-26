@@ -9,7 +9,7 @@ from grep_play.playwithgrep import run_job
 
 class TestGrep(unittest.TestCase):
 
-    def test_file_arg(self):
+    def test_file_arg_and_empty_regex(self):
         CONFIG_PATH = os.path.dirname(os.path.abspath(__file__))
         test_file = '{}/tested_file.txt'.format(CONFIG_PATH)
 
@@ -21,6 +21,41 @@ class TestGrep(unittest.TestCase):
             run_job()
         rl_output = out.getvalue().strip()
         assert rl_output == ex_output
+
+    def test_file_arg_and_regex_all_as(self):
+        CONFIG_PATH = os.path.dirname(os.path.abspath(__file__))
+        test_file = '{}/tested_file.txt'.format(CONFIG_PATH)
+
+        sys.argv = ['', '-e', 'as', test_file]
+        ex_output = '''Nulla fringilla massa diam, molestie bibendum tellus interdum nec.
+Maecenas bibendum ligula id scelerisque iaculis.
+Cras mollis risus pellentesque tellus dignissim malesuada.
+Duis eget gravida velit. Mauris bibendum massa vitae eros cursus, sed auctor dui elementum.
+Cras tristique, eros eu egestas ullamcorper, elit nisi pulvinar dui, quis placerat lectus purus a justo.
+Nunc sollicitudin, orci vel tincidunt elementum, massa dolor efficitur arcu, a scelerisque nulla mauris sit amet neque.'''
+
+        with capture_output() as (out, err):
+            run_job()
+        rl_output = out.getvalue().strip()
+        assert rl_output == ex_output
+
+    def test_file_arg_and_regex_all_as_inverted(self):
+        CONFIG_PATH = os.path.dirname(os.path.abspath(__file__))
+        test_file = '{}/tested_file.txt'.format(CONFIG_PATH)
+
+        sys.argv = ['', '-e', 'as', '-v', test_file]
+        ex_output = '''Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+Nulla nec laoreet magna.
+Suspendisse posuere mauris at mi tempus pharetra.
+Sed feugiat, orci non fringilla ultrices, urna est lobortis tortor, a aliquet lectus nunc in ex.
+Mauris id arcu efficitur, scelerisque risus at, ullamcorper ante.
+Nunc a orci sit amet libero eleifend commodo.'''
+
+        with capture_output() as (out, err):
+            run_job()
+        rl_output = out.getvalue().strip()
+        assert rl_output == ex_output
+
 
 @contextmanager
 def capture_output():
