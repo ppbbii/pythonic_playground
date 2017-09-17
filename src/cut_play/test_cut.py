@@ -8,6 +8,9 @@ from src.cut_play.playwithcut import run_job
 
 
 class TestCut(unittest.TestCase):
+    def setUp(self):
+        os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
     def test_version_expected_output(self):
         expected_output = 'VER 0.1'
 
@@ -25,7 +28,6 @@ class TestCut(unittest.TestCase):
 
     def test_character_cut(self):
         expected_output = '1\n1\n1\n1\n1'
-
         # given
         sys.argv = ['', '-c', '1', 'test.txt']
 
@@ -39,10 +41,7 @@ class TestCut(unittest.TestCase):
         assert rl_output == expected_output
 
     def test_character_cut_range(self):
-        expected_output = '1\n1\n1\n1\n1'
-
-        path = os.path.dirname(os.path.abspath(__file__))
-        print(path)
+        expected_output = '123\n123\n123\n123\n123'
 
         # given
         sys.argv = ['', '-c', '1-3', 'test.txt']

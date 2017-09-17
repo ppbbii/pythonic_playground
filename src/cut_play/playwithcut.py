@@ -23,13 +23,28 @@ def run_job():
         pattern = re.compile('-')
         assert len(pattern.findall(args.character)) <= 1
         # raise Exception("you are lacking coffee here!")
-        a = args.character.split("-")
-        sign = ''
+        starting = None
+        ending = None
+
+        if args.character.count("-") > 1:
+            raise Exception("Invalid range")
+        elif (args.character.count("-") == 1) and (args.character[0] == "-"):
+            # this is negative number, most probably
+            starting = int(args.character)-1
+        elif (args.character.count("-") == 1) and (args.character[0] != "-"):
+            starting = int(args.character.split("-")[0]) - 1
+            ending = int(args.character.split("-")[1])
+        else:
+            #probably just a single numeric here
+            starting = int(args.character) - 1
 
 
         with open(args.FILE, 'r') as f:
             for line in f:
-                print(line[int(args.character)-1])
+                if ending is None:
+                    print(line[starting])
+                else:
+                    print(line[starting:ending])
 
 
     print(output)
