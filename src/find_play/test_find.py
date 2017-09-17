@@ -4,7 +4,7 @@ from contextlib import contextmanager
 
 import sys
 
-from find_play.findfind import run_job
+from src.find_play.findfind import run_job
 
 class TestFind(unittest.TestCase):
     def test_expected_output(self):

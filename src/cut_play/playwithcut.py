@@ -1,4 +1,5 @@
 import argparse
+import os
 import re
 
 __version = 'VER 0.1'
@@ -21,9 +22,10 @@ def run_job():
     if args.character and args.FILE:
         pattern = re.compile('-')
         assert len(pattern.findall(args.character)) <= 1
-        raise Exception("you are lacking coffee here!")
+        # raise Exception("you are lacking coffee here!")
         a = args.character.split("-")
         sign = ''
+
 
         with open(args.FILE, 'r') as f:
             for line in f:

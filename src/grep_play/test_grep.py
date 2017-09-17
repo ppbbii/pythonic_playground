@@ -4,7 +4,7 @@ from contextlib import contextmanager
 
 import sys
 
-from grep_play.playwithgrep import run_job
+from src.grep_play.playwithgrep import run_job
 
 
 class TestGrep(unittest.TestCase):

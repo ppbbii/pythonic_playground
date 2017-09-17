@@ -1,9 +1,10 @@
+import os
 import unittest
 from contextlib import contextmanager
 
 import sys
 
-from cut_play.playwithcut import run_job
+from src.cut_play.playwithcut import run_job
 
 
 class TestCut(unittest.TestCase):
@@ -39,6 +40,9 @@ class TestCut(unittest.TestCase):
 
     def test_character_cut_range(self):
         expected_output = '1\n1\n1\n1\n1'
+
+        path = os.path.dirname(os.path.abspath(__file__))
+        print(path)
 
         # given
         sys.argv = ['', '-c', '1-3', 'test.txt']

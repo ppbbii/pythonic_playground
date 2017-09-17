@@ -4,7 +4,8 @@ from unittest.mock  import MagicMock
 
 import sys
 
-from exx4 import parse_sysargv_to_list_of_dicts
+# from exx4 import parse_sysargv_to_list_of_dicts
+from src.args_play.exx4 import parse_sysargv_to_list_of_dicts
 
 
 class TestExx4(unittest.TestCase):
